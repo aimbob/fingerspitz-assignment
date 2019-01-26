@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Google Analytics Content Experiment code -->
+	<script>function utmx_section(){}function utmx(){}(function(){var
+	k='188791086-0',d=document,l=d.location,c=d.cookie;
+	if(l.search.indexOf('utm_expid='+k)>0)return;
+	function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
+	indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
+	length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
+	'<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
+	'://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
+	'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
+	valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
+	'" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
+	</script><script>utmx('url','A/B');</script>
+	<!-- End of Google Analytics Content Experiment code -->
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-133305304-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-133305304-1');
+	</script>
+
+	
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Shopping cart - Eurail</title>
+	<meta name="description" content="">
+	<meta name="robots" content="noindex">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- styling -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+	<header>
+		<nav class="navbar navbar-expand-lg">
+			<div class="container">
+				<a class="navbar-brand" href="#">
+					<img src="img/eurail-color.svg" height="35" alt="">
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="fa fa-bars"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-home"></i></a></li>
+						<li class="nav-item"><a class="nav-link" href="#">Get Inspired</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">Plan your trip</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">Eurail passes</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">Book reservations</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">Deals</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">Help</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+
+	<main ng-app="eurail" ng-controller="eurailcontroller">
+		<div id="banner">
+			<div class="container">
+				<h1>Review your cart</h1>
+			</div>
+		</div>
+
+		<div id="progress" class="container">
+			<div class="progress-wrapper">
+				<ul>
+					<li class="active"><span class="d-none d-md-block">Review your cart</span></li>
+					<li><span class="d-none d-md-block">Traveler details</span></li>
+					<li><span class="d-none d-md-block">Shipping details</span></li>
+					<li><span class="d-none d-md-block">Review your order</span></li>
+					<li><span class="d-none d-md-block">Payment details</span></li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="shopping-cart" class="container">
+			<div class="row">
+				<div class="col-md-8">
+					<form action="" method="get" id="shopping-cart-form" ng-submit="subbmit()">
+					<div class="ticket">
+
+						<!-- Product -->
+						<div class="top">
+							<h2>
+								Eurail Global Pass Adult 
+								<span class="badge badge-primary float-md-right float-lg-right float-xl-right ml-2">
+									{{ api.prices.ticket[class] | currency:"&euro; ":0 }}
+								</span>
+							</h2>
+							<ul class="ticket-details">
+								<li><span class="caption">Passengers</span> <span class="value">1 Adult</span></li>
+								<li><span class="caption">Travel days</span> <span class="value">5 days within 1 month</span></li>
+								<li><span class="caption">Countries</span> <span class="value">31 countries</span></li>
+								<li>
+									<span class="caption">Seat class</span> <span class="value">{{ (class == 1 ? '1st' : '2nd') }}</span>
+								</li>
+							</ul>
+							<ul class="ticket-menu">
+								<li><a href="#"><i class="fa fa-trash-alt"></i> Remove pass(es)</a></li>
+								<li ng-if="class==1"><a href="" ng-click="downgrade()" onclick="ga('send', {hitType: 'event',eventCategory: 'click', eventAction: 'downgrade', eventLabel: '' });"><i class="fa fa-arrow-down"></i> Downgrade to 2nd class</a></li>
+							</ul>
+						</div>
+						<div class="rip"></div>
+
+
+						<!-- Upgrade -->
+						<div id="upgrade" class="middle">
+							<h2>Upgrade your travel experience</h2>
+							<ul class="fa-ul mb-4">
+								<li><span class="fa-li"><i class="fas fa-check"></i></span>Wifi + Electric outlet</li>
+								<li><span class="fa-li"><i class="fas fa-check"></i></span>More legroom + extra wide tables</li>
+								<li><span class="fa-li"><i class="fas fa-check"></i></span>Cabin service: menus are served at your seat</li>
+								<li><span class="fa-li"><i class="fas fa-check"></i></span>Individually adjustable seats</li>
+							</ul>
+							<a href="" class="btn btn-lg" ng-class="class == 1 ? 'btn-success' : 'btn-checkout'" ng-click="class='1'" onclick="ga('send', {hitType: 'event',eventCategory: 'click', eventAction: 'upgrade', eventLabel: '' });">
+								<i class="fa ml-1" ng-class="class == 2 ? 'fa-arrow-up' : 'fa-check'"></i> 
+								Upgrade<span ng-if="class==1">d</span>	 to first class <span ng-if="class==2">(+&euro;93)</span>
+							</a>
+						</div>
+						<div class="rip"></div>
+
+
+						<!-- Pass Protection -->
+						<div class="middle" id="protection">
+							<h2>
+								We recommended: Pass Protection
+								<span class="badge badge-primary float-md-right float-lg-right float-xl-right ml-2" ng-if="protection == 'true'">{{ api.prices.protection | currency:"&euro; ":0 }}</span>
+							</h2>
+							<p class="description">
+								Eurail Pass Protection gives you total peace of mind during your trip for only a small extra fee as it covers the cost of replacement tickets up to the remaining value of your Eurail Pass, if it gets lost or stolen. Only available during your check-out process. Terms and Conditions apply.
+							</p>
+							<div class="alert alert-danger" role="alert" ng-if="submitted && !protection">
+								<i class="fa fa-exclamation-triangle mr-2"></i> Please select Pass Protection preference
+							</div>
+							<div class="form-check highlight">
+								<input class="form-check-input" type="radio" ng-model="protection" name="protection" value="true" id="protection1" />
+								<label class="form-check-label" for="protection1">Yes, protect all of my qualified pass(es). <strong class="float-sm-right float-md-right float-lg-right float-xl-right">1x &euro; 17</strong></label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="radio" ng-model="protection" name="protection" id="protection2" value="false" />
+								<label class="form-check-label" for="protection2">No, thank you. I do not wish my pass(es) to be protected. </label>
+							</div>
+						</div>
+						<div class="rip"></div>
+
+						
+						<!-- Activate pass -->
+						<div class="middle">
+							<h2>
+								Activate your Eurail Pass now 
+								<span class="badge badge-primary float-md-right float-lg-right float-xl-right ml-2">1x Free</span>
+							</h2>
+							<p class="description">
+								Avoid queues at the train station and pre-activate your Eurail Pass with your start date and passport number. After activating your Eurail Pass you cannot change the start date. 
+							</p>
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" ng-model="activate" name="activate" id="activate-pass" value="true">
+								<label class="custom-control-label" for="activate-pass">Yes, activate my Eurail Pass online </label>
+							</div>
+						</div>
+						<div class="rip"></div>
+
+
+						<!-- Travel Pack -->
+						<div class="middle">
+							<h2>
+								Eurail Travel Pack 
+								<span class="badge badge-primary float-md-right float-lg-right float-xl-right ml-2">Free</span>
+							</h2>
+							<p class="description">
+								A Eurail Pass guide and European railway map come free with all orders, in the language of your choice.
+							</p>
+							<div class="form-group">
+								<select class="form-control" name="travel-pack" ng-model="travelPack" ng-options="o as o for o in api.travelPacks"></select>
+							</div>
+						</div>
+						<div class="rip"></div>
+	
+
+
+						<div class="middle" id="shipping-method">
+							<h2>
+								Shipping country and speed
+								<span class="badge badge-primary float-md-right float-lg-right float-xl-right ml-2" ng-if="shippingMethod">
+									{{ api.prices.shippingMethod[shippingMethod] | currency:"&euro; ":0 }}
+								</span>
+							</h2>
+							<p class="description">
+								Choose your shipping country and delivery method.
+							</p>
+							<div class="form-group">
+								<select class="form-control" name="country" ng-model="country" ng-options="o as o for o in api.countries"></select>
+							</div>
+							<div class="alert alert-danger" role="alert" ng-if="submitted && !shippingMethod">
+								<i class="fa fa-exclamation-triangle mr-2"></i> Please select shipping method
+							</div>
+							<div class="form-check mb-3">
+								<input class="form-check-input" type="radio" name="shipping-method" ng-model="shippingMethod" id="shippingMethod1" value="3" />
+								<label class="form-check-label" for="shippingMethod1">
+									Premium Shipping with Tracking &amp; 100% on-time delivery
+									<span>3 business days for <strong>€ 29</strong><br>Guaranteed delivery with Premium Shipping on or before <strong>January 29, 2019</strong></span>
+								</label>
+							</div>
+							<div class="form-check mb-3">
+								<input class="form-check-input" type="radio" name="shipping-method" ng-model="shippingMethod" id="shippingMethod2" value="6" />
+								<label class="form-check-label" for="shippingMethod2">
+									Standard Shipping with Tracking
+									<span>6 business days for <strong>€ 11</strong><br>Estimated delivery with Standard Shipping on or before <strong>February 01, 2019</strong></span>
+								</label>
+							</div>
+							<div class="form-check mb-3">
+								<input class="form-check-input" type="radio" name="shipping-method" ng-model="shippingMethod" id="shippingMethod3" value="10" />
+								<label class="form-check-label" for="shippingMethod3">
+									Economy Shipping
+									<span>10 business days for <strong>€ 7</strong><br>Estimated delivery with Economy Shipping on or before <strong>February 07, 2019</strong></span>
+								</label>
+							</div>
+						</div>
+						<div class="rip"></div>
+
+
+						<!-- Coupon -->
+						<div class="middle">
+							<a class="" data-toggle="collapse" href="#coupon-code" role="button" aria-expanded="false" aria-controls="coupon-code">
+								<i class="fa fa-tag"></i> Were you given a Eurail coupon code?
+							</a>
+							<div class="collapse" id="coupon-code">
+								<h2 class="mt-4">Coupon Code</h2>
+								<p>If you were given a coupon code, enter it here.</p>
+								<div class="form-group mb-2 mr-2">
+									<label for="coupon" class="sr-only">Coupon</label>
+									<input type="text" class="form-control" name="coupon-code" id="coupon" placeholder="Coupon code" />
+								</div>
+								<button type="submit" class="btn btn-primary mb-2">Apply</button>
+							</div>
+						</div>
+						<div class="rip last"></div>
+
+
+						<!-- Total -->
+						<div class="bottom">
+							<div class="row mt-4 mb-3 totals">
+								<div class="col-md-8">
+									Your total order amount:
+								</div>
+								<div class="col-md-4 price text-center">
+									{{ total() | currency:"&euro; ":2 }}
+								</div>
+							</div>
+							
+						</div>
+					</div>
+					
+					<div class="container mt-4">
+						<div class="row">
+							<div class="col-sm-6">
+								<a href="#" class="btn btn-lg btn-light btn-back"><i class="fas fa-arrow-left"></i> Continue shopping</a>
+							</div>
+							<div class="col-sm-6 text-right">
+								<a href="" class="btn btn-lg btn-checkout" ng-click="subbmit()">Proceed to checkout <i class="fas fa-arrow-right"></i></a>
+							</div>
+						</div>
+					</div>
+
+					</form>
+				</div>
+				<div class="col-md-4">
+
+					<div class="position-fix">
+						<div class="ticket d-none d-md-block">
+							<div class="top">
+								<h2>Total order amount</h2>
+								<div class="amount">{{ total() | currency:"&euro; ":2 }}</div>
+							</div>
+							<div class="rip"></div>
+							<div class="bottom">
+								<a href="" class="btn btn-lg btn-block btn-checkout" ng-click="subbmit()">Proceed to checkout <i class="fas fa-arrow-right"></i></a>
+							</div>
+						</div>
+						
+						<ul class="payments">
+							<li><i class="fab fa-3x fa-cc-mastercard"></i></li>
+							<li><i class="fab fa-3x fa-cc-visa"></i></li>
+							<li><i class="fab fa-3x fa-cc-amex"></i></li>
+							<li><i class="fab fa-3x fa-cc-paypal"></i></li>
+							<li><i class="fab fa-3x fa-cc-jcb"></i></li>
+						</ul>
+						
+						<div class="pros">
+							<ul class="fa-ul">
+								<li><span class="fa-li" ><i class="fas fa-lock"></i></span>Secure checkout process</li>
+								<li><span class="fa-li"><i class="fas fa-file-alt"></i></span>Privacy and Cookie Statement</li>
+								<li><span class="fa-li"><i class="fas fa-comment-alt "></i></span>Contact us</li>
+							</ul>
+						</div>
+						
+						<div class="geo-trust text-center">
+							<img src="img/geo-trust.gif.png" alt=""><br>
+							<a href="#">About SSL certificates</a>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+		
+	</main>
+
+
+	<footer>
+		<div id="footer">
+			<div class="container">
+				<h2>Explore Europe with Eurail on:</h2>
+				<ul class="social-list">
+					<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+					<li><a href="#"><i class="fab fa-instagram"></i></a></li>
+					<li><a href="#"><i class="fab fa-blogger-b"></i></a></li>
+					<li><a href="#"><i class="fab fa-youtube"></i></a></li>
+					<li><a href="#"><i class="fab fa-pinterest"></i></a></li>
+					<li><a href="#"><i class="fab fa-twitter"></i></a></li>
+					<li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+				</ul>
+
+				<h2>Stay updated!</h2>
+				<p>Be the first to know about our latest deals and get travel inspiration.</p>
+
+				<div class="row justify-content-md-center">
+					<div class="col-md-auto">
+						<form id="newsletter-form" action="" method="post" class="form-inline">
+							<div class="form-group mb-2 mr-2">
+								<label for="newsletter-email" class="sr-only">Email</label>
+								<input type="text" readonly class="form-control" id="newsletter-email" placeholder="Email address" />
+							</div>
+							<button type="submit" class="btn btn-primary mb-2">Sign me up</button>
+						</form>
+					</div>
+				</div>
+
+				<div class="hr mt-5 mb-5"></div>
+
+				<img src="img/eurail-color.svg" height="35" class="mb-5" alt="">
+
+				<div class="container">
+					<div class="row justify-content-md-center">
+						<div class="col col-lg-3">
+							<h3>Orders and shipping</h3>
+							<ul class="footer-list">
+								<li><a href="#">Ordering info</a></li>
+								<li><a href="#">Shipping calculator</a></li>
+								<li><a href="#">What is Eurail?</a></li>
+								<li><a href="#">How to use your pass</a></li>
+								<li><a href="#">Eurail.com Reservation Service</a></li>
+								<li><a href="#">Help</a></li>
+							</ul>
+						</div>
+						<div class="col col-lg-3">
+							<h3>Terms &amp; conditions</h3>
+							<ul class="footer-list">
+								<li><a href="#">Booking Conditions</a></li>
+								<li><a href="#">Return Policy</a></li>
+								<li><a href="#">Privacy and Cookie Statement</a></li>
+								<li><a href="#">Disclaimer</a></li>
+							</ul>
+						</div>
+						<div class="col col-lg-3">
+							<h3>Our company</h3>
+							<ul class="footer-list">
+								<li><a href="#">About us</a></li>
+								<li><a href="#">Company details</a></li>
+								<li><a href="#">News</a></li>
+								<li><a href="#">Jobs</a></li>
+								<li><a href="#">Press/marketing inquiries</a></li>
+								<li><a href="#">Become our partner</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</footer>
+
+
+	<!-- scripts -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular.min.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular-sanitize.js" type="text/javascript"></script>
+	<script src="js/main.js"></script>
+</body>
+
+</html>
